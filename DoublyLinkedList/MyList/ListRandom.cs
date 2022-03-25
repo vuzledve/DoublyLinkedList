@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace DoublyLinkedList.MyList
 {
 
@@ -64,9 +59,15 @@ namespace DoublyLinkedList.MyList
             }
             return data;
         }
-
+        public void FileWrite(string path)
+        {
+           // string path = "C:/temp/MyTest.txt";
+            Stream s = new FileStream("path", FileMode.Create);
+            Serialize(s);
+        }
         public void Serialize(Stream s)
         {
+            
         }
 
         public void Deserialize(Stream s)

@@ -17,6 +17,8 @@ namespace DoublyLinkedList
             RefreshWindow();
         }
 
+        #region Обработка нажатий кнопок
+
         private void addNode_button_Click(object sender, EventArgs e)
         {
             listRandom.addNode();
@@ -24,6 +26,19 @@ namespace DoublyLinkedList
             RefreshWindow();
         }
 
+
+        private void Serialization_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Deserialization_button_Click(object sender, EventArgs e)
+        {
+
+        } 
+        #endregion
+
+        #region Методы для отображения интерфейса
         private void RefreshWindow()
         {
             count_label.Text = $"count: {listRandom.Count}";
@@ -36,8 +51,8 @@ namespace DoublyLinkedList
             //        list_textBox.Text += Environment.NewLine;
             //    else
             //        list_textBox.Text += data[i];
+        } 
+        #endregion
 
-
-        }
     }
 }

@@ -31,11 +31,14 @@
             this.addNode_button = new System.Windows.Forms.Button();
             this.count_label = new System.Windows.Forms.Label();
             this.list_textBox = new System.Windows.Forms.TextBox();
+            this.Serialization_button = new System.Windows.Forms.Button();
+            this.Deserialization_button = new System.Windows.Forms.Button();
+            this.path_textBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // addNode_button
             // 
-            this.addNode_button.Location = new System.Drawing.Point(82, 290);
+            this.addNode_button.Location = new System.Drawing.Point(94, 290);
             this.addNode_button.Name = "addNode_button";
             this.addNode_button.Size = new System.Drawing.Size(63, 45);
             this.addNode_button.TabIndex = 1;
@@ -58,15 +61,45 @@
             this.list_textBox.Multiline = true;
             this.list_textBox.Name = "list_textBox";
             this.list_textBox.ReadOnly = true;
-            this.list_textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.list_textBox.Size = new System.Drawing.Size(223, 261);
             this.list_textBox.TabIndex = 3;
+            // 
+            // Serialization_button
+            // 
+            this.Serialization_button.Location = new System.Drawing.Point(12, 375);
+            this.Serialization_button.Name = "Serialization_button";
+            this.Serialization_button.Size = new System.Drawing.Size(102, 43);
+            this.Serialization_button.TabIndex = 4;
+            this.Serialization_button.Text = "Serialization";
+            this.Serialization_button.UseVisualStyleBackColor = true;
+            this.Serialization_button.Click += new System.EventHandler(this.Serialization_button_Click);
+            // 
+            // Deserialization_button
+            // 
+            this.Deserialization_button.Location = new System.Drawing.Point(133, 375);
+            this.Deserialization_button.Name = "Deserialization_button";
+            this.Deserialization_button.Size = new System.Drawing.Size(102, 43);
+            this.Deserialization_button.TabIndex = 5;
+            this.Deserialization_button.Text = "Deserialization";
+            this.Deserialization_button.UseVisualStyleBackColor = true;
+            this.Deserialization_button.Click += new System.EventHandler(this.Deserialization_button_Click);
+            // 
+            // path_textBox
+            // 
+            this.path_textBox.Location = new System.Drawing.Point(12, 345);
+            this.path_textBox.Name = "path_textBox";
+            this.path_textBox.Size = new System.Drawing.Size(223, 23);
+            this.path_textBox.TabIndex = 6;
+            this.path_textBox.Text = "C:/MyTest.txt";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(247, 421);
+            this.ClientSize = new System.Drawing.Size(247, 430);
+            this.Controls.Add(this.path_textBox);
+            this.Controls.Add(this.Deserialization_button);
+            this.Controls.Add(this.Serialization_button);
             this.Controls.Add(this.list_textBox);
             this.Controls.Add(this.count_label);
             this.Controls.Add(this.addNode_button);
@@ -82,5 +115,8 @@
         private Button addNode_button;
         private Label count_label;
         private TextBox list_textBox;
+        private Button Serialization_button;
+        private Button Deserialization_button;
+        private TextBox path_textBox;
     }
 }
