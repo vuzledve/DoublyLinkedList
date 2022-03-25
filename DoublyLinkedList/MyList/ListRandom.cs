@@ -11,13 +11,14 @@ namespace DoublyLinkedList.MyList
     {
         private ListNode? Head;
         private ListNode? Tail;
-        private int Count;
+        private int count;
 
+        public int Count { get => count; }
         public ListRandom()
         {
             Head = null;
             Tail = null;
-            Count = 0;
+            count = 0;
         }
 
         public void addNode() //вставка в конец списка
@@ -38,13 +39,13 @@ namespace DoublyLinkedList.MyList
                 Tail = newNode;
             }
             newNode.Random = GetRandomNode();
-            Count++;
+            count++;
         }
 
         private ListNode GetRandomNode()
         {
             ListNode node = Head;
-            int rnd = new Random().Next(Count);
+            int rnd = new Random().Next(count);
             for (int i = 0; i < rnd; i++)
             {
                 node= node.Next;
