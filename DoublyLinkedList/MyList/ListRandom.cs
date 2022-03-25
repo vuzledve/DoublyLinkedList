@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DoublyLinkedList.MyList
 {
-    
-    class ListRandom
+
+    public class ListRandom
     {
-        public ListNode? Head;
-        public ListNode? Tail;
-        public int Count;
+        private ListNode? Head;
+        private ListNode? Tail;
+        private int Count;
 
         public ListRandom()
         {
@@ -20,8 +20,9 @@ namespace DoublyLinkedList.MyList
             Count = 0;
         }
 
-        public void addNode(ListNode newNode) //вставка в конец списка
+        public void addNode() //вставка в конец списка
         {
+            ListNode newNode = new ListNode();
             newNode.Next = null; //тк список не кольцевой и добавляем всегда в конец - ссылка на след. эл.=null
             
             if (Head == null)

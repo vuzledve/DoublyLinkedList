@@ -12,7 +12,7 @@ namespace DoublyLinkedList.MyList
         public ListNode? Next;
         public ListNode? Random; // произвольный элемент внутри списка
         public string Data;
-        ListNode()
+        public ListNode()
         {
             Previous = null;
             Next = null;
