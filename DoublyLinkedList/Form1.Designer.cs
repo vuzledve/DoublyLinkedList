@@ -34,6 +34,7 @@
             this.Serialization_button = new System.Windows.Forms.Button();
             this.Deserialization_button = new System.Windows.Forms.Button();
             this.path_textBox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addNode_button
@@ -90,13 +91,23 @@
             this.path_textBox.Name = "path_textBox";
             this.path_textBox.Size = new System.Drawing.Size(223, 23);
             this.path_textBox.TabIndex = 6;
-            this.path_textBox.Text = "C:/MyTest.txt";
+            this.path_textBox.Text = "C:\\temp\\MyTest.txt";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 290);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(53, 45);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "+";
+            this.button1.UseVisualStyleBackColor = true;           
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(247, 430);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.path_textBox);
             this.Controls.Add(this.Deserialization_button);
             this.Controls.Add(this.Serialization_button);
@@ -118,5 +129,6 @@
         private Button Serialization_button;
         private Button Deserialization_button;
         private TextBox path_textBox;
+        private Button button1;
     }
 }

@@ -29,7 +29,8 @@ namespace DoublyLinkedList
 
         private void Serialization_button_Click(object sender, EventArgs e)
         {
-
+            listRandom.FileWrite(@path_textBox.Text);
+           // throw new Exception("3");
         }
 
         private void Deserialization_button_Click(object sender, EventArgs e)
@@ -51,8 +52,9 @@ namespace DoublyLinkedList
             //        list_textBox.Text += Environment.NewLine;
             //    else
             //        list_textBox.Text += data[i];
-        } 
+        }
         #endregion
 
+        
     }
 }
