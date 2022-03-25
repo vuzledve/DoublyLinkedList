@@ -22,7 +22,6 @@ namespace DoublyLinkedList
         private void addNode_button_Click(object sender, EventArgs e)
         {
             listRandom.addNode();
-
             RefreshWindow();
         }
 
@@ -30,12 +29,13 @@ namespace DoublyLinkedList
         private void Serialization_button_Click(object sender, EventArgs e)
         {
             listRandom.FileWrite(@path_textBox.Text);
-           // throw new Exception("3");
+            RefreshWindow();
         }
 
         private void Deserialization_button_Click(object sender, EventArgs e)
         {
-
+            listRandom.FileRead(@path_textBox.Text);
+            RefreshWindow();
         } 
         #endregion
 

@@ -12,9 +12,7 @@ namespace DoublyLinkedList.MyList
         public int Count { get => count; }
         public ListRandom()
         {
-            Head = null;
-            Tail = null;
-            count = 0;
+            Clear();
         }
 
         public void addNode() //вставка в конец списка
@@ -26,6 +24,26 @@ namespace DoublyLinkedList.MyList
             {
                 Head = newNode;
                 Tail = newNode;               
+                newNode.Previous = null;
+            }
+            else
+            {
+                Tail.Next = newNode;
+                newNode.Previous = Tail;
+                Tail = newNode;
+            }
+            newNode.Random = GetRandomNode();
+            count++;
+        }
+        public void addNode(string data) //вставка в конец списка
+        {
+            ListNode newNode = new ListNode(data);
+            newNode.Next = null; //тк список не кольцевой и добавляем всегда в конец - ссылка на след. эл.=null
+
+            if (Head == null)
+            {
+                Head = newNode;
+                Tail = newNode;
                 newNode.Previous = null;
             }
             else
@@ -60,24 +78,27 @@ namespace DoublyLinkedList.MyList
             }
             return data;
         }
+        #region запись в файл
         public void FileWrite(string path)
-        { 
+        {
             Stream s = new FileStream(path, FileMode.Create);
             Serialize(s);
+            Clear();
         }
         public void Serialize(Stream s)
         {
-            try 
+            try
             {
                 ListNode tmp = Head;
                 for (int i = 0; i < count; i++)
                 {
                     byte[] bytes = new byte[tmp.Data.Length];
                     bytes = Encoding.ASCII.GetBytes(tmp.Data);
-                   // byte[] bytes = Encoding.ASCII.GetBytes(tmp.Data);
+                    // byte[] bytes = Encoding.ASCII.GetBytes(tmp.Data);
                     if (s.CanWrite)
                     {
                         s.Write(bytes, 0, bytes.Length);
+                        s.WriteByte((byte)'\n');
                     }
                     else
                     {
@@ -94,12 +115,58 @@ namespace DoublyLinkedList.MyList
             {
                 s.Close();
             }
-            
-        }
 
-        public void Deserialize(Stream s)
+        }
+        #endregion
+
+        #region чтение из файла
+        public void FileRead(string path)
         {
-            //string someString = Encoding.ASCII.GetString(bytes);
+            if (!File.Exists(path))
+            {
+                throw new Exception("File " + path + " does not exists");
+            }
+            if (File.ReadAllBytes(path).Length > 0)
+            {
+                Stream s = new FileStream(path, FileMode.Open);
+                Clear();
+                Deserialize(s);
+            }
+            else
+                throw new Exception("File " + path + " is empty");
+        }
+        public void Deserialize(Stream s)
+        {          
+            string data = "";
+
+            byte[] temp = new byte[1];
+            UTF8Encoding encoding = new UTF8Encoding(true);
+
+            for(int i=0;  s.Read(temp, 0, temp.Length) > 0;i++)
+            {               
+                String str = encoding.GetString(temp, 0, 1);
+               // char ch = (char)encoding.GetChars(temp, ch);
+                if (str[0] != '\n')
+                {
+                    //запись в тек. ноду
+                    data += str[0];
+                }
+                else
+                {
+                    addNode(data);
+                    data = "";
+                }
+            }
+            s.Close();
+
+        } 
+        #endregion
+
+        private void Clear()
+        {
+            Head = null;
+            Tail = null;
+            count = 0;
         }
     }
 }

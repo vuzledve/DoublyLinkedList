@@ -19,5 +19,12 @@ namespace DoublyLinkedList.MyList
             Random = null;
             Data = StrMethods.RandomStr();
         }
+        public ListNode(string data)
+        {
+            Previous = null;
+            Next = null;
+            Random = null;
+            Data = data;
+        }
     }
 }
