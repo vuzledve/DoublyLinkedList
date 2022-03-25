@@ -58,6 +58,7 @@
             this.list_textBox.Multiline = true;
             this.list_textBox.Name = "list_textBox";
             this.list_textBox.ReadOnly = true;
+            this.list_textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.list_textBox.Size = new System.Drawing.Size(223, 261);
             this.list_textBox.TabIndex = 3;
             // 

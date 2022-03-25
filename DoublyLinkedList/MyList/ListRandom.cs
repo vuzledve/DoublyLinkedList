@@ -53,6 +53,18 @@ namespace DoublyLinkedList.MyList
             return node;
         }
 
+        public string GetAllListData()
+        {
+            string data = "";
+            ListNode tmp = Head;
+            for (int i=0; i< count;i++)
+            {
+                data += tmp.Data + Environment.NewLine;
+                tmp = tmp.Next;
+            }
+            return data;
+        }
+
         public void Serialize(Stream s)
         {
         }

@@ -4,12 +4,7 @@ namespace DoublyLinkedList
 {
     public partial class Form1 : Form
     {
-
-
-
         ListRandom listRandom;
-
-
 
         public Form1()
         {
@@ -32,8 +27,17 @@ namespace DoublyLinkedList
         private void RefreshWindow()
         {
             count_label.Text = $"count: {listRandom.Count}";
-            list_textBox.Text = "adsdasd";
-            
+
+            list_textBox.Text = listRandom.GetAllListData();
+
+            //string data = listRandom.GetAllListData();
+            //for (int i = 0; i < data.Length; i++)
+            //    if (data[i] == '\n')
+            //        list_textBox.Text += Environment.NewLine;
+            //    else
+            //        list_textBox.Text += data[i];
+
+
         }
     }
 }
