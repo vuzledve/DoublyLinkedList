@@ -92,12 +92,18 @@ namespace DoublyLinkedList.MyList
                 ListNode tmp = Head;
                 for (int i = 0; i < count; i++)
                 {
-                    byte[] bytes = new byte[tmp.Data.Length];
-                    bytes = Encoding.ASCII.GetBytes(tmp.Data);
-                    // byte[] bytes = Encoding.ASCII.GetBytes(tmp.Data);
+                    byte[] nodeData = new byte[tmp.Data.Length];
+                    nodeData = Encoding.ASCII.GetBytes(tmp.Data);
+
+                    string str = Convert.ToString(GetNodeNum(tmp.Random));
+                    byte[] nodeRandomNum = new byte[str.Length];
+                    nodeRandomNum = Encoding.ASCII.GetBytes(str);
+                    
                     if (s.CanWrite)
                     {
-                        s.Write(bytes, 0, bytes.Length);
+                        s.Write(nodeData, 0, nodeData.Length);
+                        s.WriteByte((byte)'\n');
+                        s.Write(nodeRandomNum, 0, nodeRandomNum.Length);
                         s.WriteByte((byte)'\n');
                     }
                     else
@@ -196,8 +202,6 @@ namespace DoublyLinkedList.MyList
             {
                 tmp = tmp.Next;
             }
-           
-
             return tmp;
         }
     }
