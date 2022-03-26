@@ -294,6 +294,8 @@ namespace DoublyLinkedList.MyList
             {
                 tmp = tmp.Next;
             }
+            if (tmp == null)
+                throw new Exception($"Элемента с номером {num} не существует");
             return tmp;
         } 
         #endregion
