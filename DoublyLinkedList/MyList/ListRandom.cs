@@ -163,9 +163,9 @@ namespace DoublyLinkedList.MyList
                             break;
                         case ListNodeField.random:
                             if (numbers.Count < count)
-                                numbers.Add(Convert.ToInt32(str[0])); //если элемент еще не создавался - создаем
+                                numbers.Add(Int32.Parse(str)); //если элемент еще не создавался - создаем
                             else
-                                numbers[count - 1] = (numbers[count - 1]*10)+ Convert.ToInt32(str[0]); //count уже учитывает создаваемую ноду
+                                numbers[count - 1] = (numbers[count - 1]*10)+ Int32.Parse(str); //count уже учитывает создаваемую ноду
                             break;
                     }       
                 }
