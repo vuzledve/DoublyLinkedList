@@ -144,27 +144,56 @@ namespace DoublyLinkedList.MyList
         public void Deserialize(Stream s)
         {
             string data = "";
+            List<int> numbers = new List<int>(); //вообще можно было бы сразу искать ноду, которая записана в поле рандом тк при генерации списка кнопкой в интерфейсе номер рандомНоды выбирается из уже существующих. запись номеров в list нужна в случае если возможен вариант когда номер указывает на элемент, который добавится в список позже(например ввод вручную через файл или текстБокс)
+            ListNodeField fieldNum = ListNodeField.data; //тут можно bool и вместо switch написать if, но тогда при добавлении полей в ListNode это надо было бы переписывать
 
             byte[] temp = new byte[1];
             UTF8Encoding encoding = new UTF8Encoding(true);
 
-            for (int i = 0; s.Read(temp, 0, temp.Length) > 0; i++)
+            while (s.Read(temp, 0, temp.Length) > 0)
             {
-                String str = encoding.GetString(temp, 0, 1);
-                // char ch = (char)encoding.GetChars(temp, ch);
+                String str = encoding.GetString(temp, 0, 1); //содержит только что прочитанный символ
+               
                 if (str[0] != '\n')
                 {
-                    //запись в тек. ноду
-                    data += str[0];
+                    switch (fieldNum)
+                    {
+                        case ListNodeField.data:
+                            data += str[0];
+                            break;
+                        case ListNodeField.random:
+                            if (numbers.Count < count)
+                                numbers.Add(Convert.ToInt32(str[0])); //если элемент еще не создавался - создаем
+                            else
+                                numbers[count - 1] = (numbers[count - 1]*10)+ Convert.ToInt32(str[0]); //count уже учитывает создаваемую ноду
+                            break;
+                    }       
                 }
                 else
                 {
-                    addNode(data);
-                    data = "";
+                    switch (fieldNum)
+                    {
+                        case ListNodeField.data:
+                            addNode(data); //при прочтении первого поля создаем ноду
+                            data = "";
+                            fieldNum = ListNodeField.random;
+                            break;
+                        case ListNodeField.random:
+                            fieldNum = ListNodeField.data;
+                            break;
+                    }
+                   
                 }
             }
             s.Close();
 
+            /* заполнение полей ListNode.Random */
+            ListNode tmp = Head;
+            for (int i = 0; i < count; i++)
+            {
+                tmp.Random = GetNode(numbers[i]);
+                tmp = tmp.Next;
+            }
         }
         #endregion
 
@@ -203,6 +232,12 @@ namespace DoublyLinkedList.MyList
                 tmp = tmp.Next;
             }
             return tmp;
+        }
+
+        enum ListNodeField
+        {
+            data,
+            random
         }
     }
 }
