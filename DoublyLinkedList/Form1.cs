@@ -4,6 +4,8 @@ namespace DoublyLinkedList
 {
     public partial class Form1 : Form
     {
+
+        #region Инициализация
         ListRandom listRandom;
 
         public Form1()
@@ -15,7 +17,8 @@ namespace DoublyLinkedList
         {
             listRandom = new ListRandom();
             RefreshWindow();
-        }
+        } 
+        #endregion
 
         #region Обработка нажатий кнопок
 
@@ -36,7 +39,19 @@ namespace DoublyLinkedList
         {
             listRandom.FileRead(@path_textBox.Text);
             RefreshWindow();
-        } 
+        }
+
+        private void Save_changes_button_Click(object sender, EventArgs e)
+        {
+            listRandom = new ListRandom(list_textBox.Text);
+            RefreshWindow();
+            MessageBox.Show("Изменения сохранены");
+        }
+
+        private void Refresh_window_button_Click(object sender, EventArgs e)
+        {
+            RefreshWindow();
+        }
         #endregion
 
         #region Методы для отображения интерфейса
@@ -45,27 +60,7 @@ namespace DoublyLinkedList
             count_label.Text = $"count: {listRandom.Count}";
 
             list_textBox.Text = listRandom.GetAllListData();
-
-            //string data = listRandom.GetAllListData();
-            //for (int i = 0; i < data.Length; i++)
-            //    if (data[i] == '\n')
-            //        list_textBox.Text += Environment.NewLine;
-            //    else
-            //        list_textBox.Text += data[i];
         }
-
-
         #endregion
-
-        private void Save_changes_button_Click(object sender, EventArgs e)
-        {
-            listRandom = new ListRandom(list_textBox.Text);
-            RefreshWindow();
-        }
-
-        private void Refresh_window_button_Click(object sender, EventArgs e)
-        {
-            RefreshWindow();
-        }
     }
 }

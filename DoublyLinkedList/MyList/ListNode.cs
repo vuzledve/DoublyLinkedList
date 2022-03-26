@@ -17,7 +17,7 @@ namespace DoublyLinkedList.MyList
             Previous = null;
             Next = null;
             Random = null;
-            Data = StrMethods.RandomStr();
+            Data = StrMethods.RandomStr(3,7);
         }
         public ListNode(string data)
         {

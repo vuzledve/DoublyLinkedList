@@ -8,10 +8,10 @@ namespace DoublyLinkedList
 {
     static public class StrMethods
     {
-        static public string RandomStr()
+        static public string RandomStr(int min, int max)
         {
             string result = "";
-            int rnd = new Random().Next(3, 7);
+            int rnd = new Random().Next(min, max);
             for (int i = 0; i < rnd; i++)
                 result += NumberToAZ();
             return result;

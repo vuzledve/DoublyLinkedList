@@ -10,23 +10,26 @@ namespace DoublyLinkedList.MyList
         private int count;
 
         public int Count { get => count; }
+
+        enum ListNodeField
+        {
+            data,
+            random
+        }
+
+        #region конструкторы
         public ListRandom()
         {
             Clear();
         }
+
         public ListRandom(string allData)
         {
             Clear();
-            //allData.Replace(@"\r", "o");
-            //allData.Replace(Environment.NewLine, "o");
-            //for (int i = 0; i < allData.Length - 1; i++)
-            //    if (allData[i] + allData[i + 1] +"" == Environment.NewLine +"")
-            //        throw new ArgumentException();
-            //allData.remove(Environment.NewLine, "")
             allData = allData.Replace("\r", "");
             string data = "";
             List<int> numbers = new List<int>();
-            ListNodeField fieldNum = ListNodeField.data; 
+            ListNodeField fieldNum = ListNodeField.data;
 
             for (int i = 0; i < allData.Length; i++)
             {
@@ -69,70 +72,9 @@ namespace DoublyLinkedList.MyList
                 tmp.Random = GetNode(numbers[i]);
                 tmp = tmp.Next;
             }
-        }
-        public void addNode() //вставка в конец списка
-        {
-            ListNode newNode = new ListNode();
-            newNode.Next = null; //тк список не кольцевой и добавляем всегда в конец - ссылка на след. эл.=null
-
-            if (Head == null)
-            {
-                Head = newNode;
-                Tail = newNode;
-                newNode.Previous = null;
-            }
-            else
-            {
-                Tail.Next = newNode;
-                newNode.Previous = Tail;
-                Tail = newNode;
-            }
-            newNode.Random = GetRandomNode();
-            count++;
-        }
-        public void addNode(string data) //вставка в конец списка
-        {
-            ListNode newNode = new ListNode(data);
-            newNode.Next = null; //тк список не кольцевой и добавляем всегда в конец - ссылка на след. эл.=null
-
-            if (Head == null)
-            {
-                Head = newNode;
-                Tail = newNode;
-                newNode.Previous = null;
-            }
-            else
-            {
-                Tail.Next = newNode;
-                newNode.Previous = Tail;
-                Tail = newNode;
-            }
-            newNode.Random = GetRandomNode();
-            count++;
-        }
-
-        private ListNode GetRandomNode()
-        {
-            ListNode node = Head;
-            int rnd = new Random().Next(count);
-            for (int i = 0; i < rnd; i++)
-            {
-                node = node.Next;
-            }
-            return node;
-        }
-
-        public string GetAllListData()
-        {
-            string data = "";
-            ListNode tmp = Head;
-            for (int i = 0; i < count; i++)
-            {
-                data += tmp.Data + Environment.NewLine + GetNodeNum(tmp.Random) + Environment.NewLine;
-                tmp = tmp.Next;
-            }
-            return data;
-        }
+        } 
+        #endregion
+      
         #region запись в файл
         public void FileWrite(string path)
         {
@@ -252,11 +194,77 @@ namespace DoublyLinkedList.MyList
         }
         #endregion
 
+        #region Методы
+
         private void Clear()
         {
             Head = null;
             Tail = null;
             count = 0;
+        }
+        public void addNode() //вставка в конец списка
+        {
+            ListNode newNode = new ListNode();
+            newNode.Next = null; //тк список не кольцевой и добавляем всегда в конец - ссылка на след. эл.=null
+
+            if (Head == null)
+            {
+                Head = newNode;
+                Tail = newNode;
+                newNode.Previous = null;
+            }
+            else
+            {
+                Tail.Next = newNode;
+                newNode.Previous = Tail;
+                Tail = newNode;
+            }
+            newNode.Random = GetRandomNode();
+            count++;
+        }
+
+        public void addNode(string data) //вставка в конец списка
+        {
+            ListNode newNode = new ListNode(data);
+            newNode.Next = null; //тк список не кольцевой и добавляем всегда в конец - ссылка на след. эл.=null
+
+            if (Head == null)
+            {
+                Head = newNode;
+                Tail = newNode;
+                newNode.Previous = null;
+            }
+            else
+            {
+                Tail.Next = newNode;
+                newNode.Previous = Tail;
+                Tail = newNode;
+            }
+            newNode.Random = GetRandomNode();
+            count++;
+        }
+
+        private ListNode GetRandomNode()
+        {
+            ListNode node = Head;
+            int rnd = new Random().Next(count);
+            for (int i = 0; i < rnd; i++)
+            {
+                node = node.Next;
+            }
+            return node;
+        }
+
+        public string GetAllListData()
+        {
+            string data = "";
+            ListNode tmp = Head;
+            for (int i = 0; i < count; i++)
+            {
+                data += tmp.Data + Environment.NewLine + GetNodeNum(tmp.Random) + Environment.NewLine;
+                tmp = tmp.Next;
+            }
+            return data;
         }
 
         private int GetNodeNum(ListNode node)
@@ -265,9 +273,9 @@ namespace DoublyLinkedList.MyList
             if (Head != null)
             {
                 ListNode tmp = Head;
-                while (tmp!=node)
+                while (tmp != node)
                 {
-                    tmp=tmp.Next;
+                    tmp = tmp.Next;
                     id++;
                 }
             }
@@ -287,12 +295,8 @@ namespace DoublyLinkedList.MyList
                 tmp = tmp.Next;
             }
             return tmp;
-        }
+        } 
+        #endregion
 
-        enum ListNodeField
-        {
-            data,
-            random
-        }
     }
 }
