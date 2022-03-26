@@ -19,11 +19,11 @@ namespace DoublyLinkedList.MyList
         {
             ListNode newNode = new ListNode();
             newNode.Next = null; //тк список не кольцевой и добавляем всегда в конец - ссылка на след. эл.=null
-            
+
             if (Head == null)
             {
                 Head = newNode;
-                Tail = newNode;               
+                Tail = newNode;
                 newNode.Previous = null;
             }
             else
@@ -62,7 +62,7 @@ namespace DoublyLinkedList.MyList
             int rnd = new Random().Next(count);
             for (int i = 0; i < rnd; i++)
             {
-                node= node.Next;
+                node = node.Next;
             }
             return node;
         }
@@ -71,9 +71,9 @@ namespace DoublyLinkedList.MyList
         {
             string data = "";
             ListNode tmp = Head;
-            for (int i=0; i< count;i++)
+            for (int i = 0; i < count; i++)
             {
-                data += tmp.Data + Environment.NewLine;
+                data += tmp.Data + Environment.NewLine + GetNodeNum(tmp.Random) + Environment.NewLine;
                 tmp = tmp.Next;
             }
             return data;
@@ -136,16 +136,16 @@ namespace DoublyLinkedList.MyList
                 throw new Exception("File " + path + " is empty");
         }
         public void Deserialize(Stream s)
-        {          
+        {
             string data = "";
 
             byte[] temp = new byte[1];
             UTF8Encoding encoding = new UTF8Encoding(true);
 
-            for(int i=0;  s.Read(temp, 0, temp.Length) > 0;i++)
-            {               
+            for (int i = 0; s.Read(temp, 0, temp.Length) > 0; i++)
+            {
                 String str = encoding.GetString(temp, 0, 1);
-               // char ch = (char)encoding.GetChars(temp, ch);
+                // char ch = (char)encoding.GetChars(temp, ch);
                 if (str[0] != '\n')
                 {
                     //запись в тек. ноду
@@ -159,7 +159,7 @@ namespace DoublyLinkedList.MyList
             }
             s.Close();
 
-        } 
+        }
         #endregion
 
         private void Clear()
@@ -167,6 +167,26 @@ namespace DoublyLinkedList.MyList
             Head = null;
             Tail = null;
             count = 0;
+        }
+
+        private int GetNodeNum(ListNode node)
+        {
+            int id = 0;
+            if (Head != null)
+            {
+                ListNode tmp = Head;
+                while (tmp!=node)
+                {
+                    tmp=tmp.Next;
+                    id++;
+                }
+            }
+            else
+            {
+                id = -1;
+            }
+
+            return id;
         }
     }
 }
