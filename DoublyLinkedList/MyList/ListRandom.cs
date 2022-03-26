@@ -188,5 +188,17 @@ namespace DoublyLinkedList.MyList
 
             return id;
         }
+        private ListNode GetNode(int num)
+        {
+            ListNode tmp = Head;
+
+            for (int i = 0; i < num; i++)
+            {
+                tmp = tmp.Next;
+            }
+           
+
+            return tmp;
+        }
     }
 }
