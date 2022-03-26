@@ -53,8 +53,19 @@ namespace DoublyLinkedList
             //    else
             //        list_textBox.Text += data[i];
         }
+
+
         #endregion
 
-        
+        private void Save_changes_button_Click(object sender, EventArgs e)
+        {
+            listRandom = new ListRandom(list_textBox.Text);
+            RefreshWindow();
+        }
+
+        private void Refresh_window_button_Click(object sender, EventArgs e)
+        {
+            RefreshWindow();
+        }
     }
 }

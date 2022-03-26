@@ -14,7 +14,62 @@ namespace DoublyLinkedList.MyList
         {
             Clear();
         }
+        public ListRandom(string allData)
+        {
+            Clear();
+            //allData.Replace(@"\r", "o");
+            //allData.Replace(Environment.NewLine, "o");
+            //for (int i = 0; i < allData.Length - 1; i++)
+            //    if (allData[i] + allData[i + 1] +"" == Environment.NewLine +"")
+            //        throw new ArgumentException();
+            //allData.remove(Environment.NewLine, "")
+            allData = allData.Replace("\r", "");
+            string data = "";
+            List<int> numbers = new List<int>();
+            ListNodeField fieldNum = ListNodeField.data; 
 
+            for (int i = 0; i < allData.Length; i++)
+            {
+                if (allData[i] != '\n')
+                {
+                    switch (fieldNum)
+                    {
+                        case ListNodeField.data:
+                            data += allData[i];
+                            break;
+                        case ListNodeField.random:
+                            if (numbers.Count < count)
+                                numbers.Add(Int32.Parse(allData[i] + "")); //если элемент еще не создавался - создаем
+                            else
+                                numbers[count - 1] = (numbers[count - 1] * 10) + Int32.Parse(allData[i] + ""); //count уже учитывает создаваемую ноду
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (fieldNum)
+                    {
+                        case ListNodeField.data:
+                            addNode(data); //при прочтении первого поля создаем ноду
+                            data = "";
+                            fieldNum = ListNodeField.random;
+                            break;
+                        case ListNodeField.random:
+                            fieldNum = ListNodeField.data;
+                            break;
+                    }
+
+                }
+            }
+
+            /* заполнение полей ListNode.Random */
+            ListNode tmp = Head;
+            for (int i = 0; i < count; i++)
+            {
+                tmp.Random = GetNode(numbers[i]);
+                tmp = tmp.Next;
+            }
+        }
         public void addNode() //вставка в конец списка
         {
             ListNode newNode = new ListNode();
